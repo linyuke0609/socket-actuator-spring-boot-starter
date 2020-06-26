@@ -15,8 +15,38 @@
 
 #### 使用教学
 
-1.  xxxx
+   maven引入:
+```
+<dependency>
+  <groupId>com.xiejr.actuator</groupId>
+  <artifactId>socket-actuator-spring-boot-starter</artifactId>
+  <version>1.0.0.RELEASE</version>
+</dependency>
+```
 
+在配置文件application.yml或者application.properties中配置相关的信息,如下:
+
+```
+socket:
+  actuator:
+    author: xiejiarong
+    ip-address: 127.0.0.1
+    active: true #开启监控的开关参数
+    version: 1.0
+    system-name: springboot监控系统
+    server:
+      eviction-interval-timer-in-ms: 10  #socket心跳移除定时器时间
+      lease-renewal-interval-in-seconds: 3 #设备心跳续约时间
+      evit-when-time-out: false #到期后是否立马移除
+      lease-expiration-duration-in-seconds: 9  #心跳最长间隔
+    simple-page-application: true 
+ ```
+ 项目启动之后访问http:ip+port/monitor.html即可看到监控页面。效果图如下:
+ 
+ ![主页](https://images.gitee.com/uploads/images/2020/0626/142043_4d959464_2291825.png "屏幕截图.png")
+ 
+ 
+ 
 #### 参与贡献
 
 1.  Fork 本仓库
@@ -25,11 +55,6 @@
 4.  新建 Pull Request
 
 
-#### 码云特技
+ 开源不易，各位developer给颗星哈。
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+   欢迎发起PR，一起来完善这个项目。 
