@@ -2,8 +2,10 @@ package com.xiejr.actuator.service;
 
 import com.xiejr.actuator.entity.DeviceVo;
 import com.xiejr.actuator.exceptioin.SocketActuatorException;
+import com.xiejr.actuator.model.Message;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: socket-actuator-spring-boot-starter
@@ -16,4 +18,6 @@ public interface IpadActuatorService {
     List<DeviceVo> list();
 
     void disconnect(String sessionId) throws SocketActuatorException;
+
+    Map<String, Message> hearts(String sessionId) throws SocketActuatorException;
 }

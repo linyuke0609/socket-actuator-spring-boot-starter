@@ -13,6 +13,8 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,6 +36,8 @@ public class WebSocketConfig {
 
     private Session session;
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER=DateTimeFormatter.ofPattern("dd日 hh时:mm分:ss秒");
+
 
 
 
@@ -48,14 +52,19 @@ public class WebSocketConfig {
     public void onOpen(Session session, @PathParam("ip") String ip) throws Exception {
         this.session=session;
         InetSocketAddress ipAddress= WebsocketUtils.getRemoteAddress(session);
-        String sessionId=session.getId();
         LocalDateTime now=LocalDateTime.now();
+        String time=DATE_TIME_FORMATTER.format(now);
+        String sessionId=session.getId();
+        LinkedHashMap<String,Message> history=new LinkedHashMap<>(50);
+        history.put(time,new Message().setFrom(RoleEnum.CLIENT.getCode()).setContent("客户端首次连接").setTo(RoleEnum.SERVER.getCode())
+        .setSendTime(time));
         SocketClient socketClient=SocketClient.builder()
                 .close(false)
                 .conectTime(now)
                 .session(session)
                 .deviceIp(ip)
                 .lastRefreshTime(now)
+                .history(history)
                 .build();
         if (socketConfigMap.containsKey(sessionId)) {
             socketConfigMap.remove(sessionId);
@@ -65,17 +74,6 @@ public class WebSocketConfig {
             addOnlineCount();
         }
         log.info("有ip为{}的新设备接入,当前设备总数:{}",ip,getOnlineCount());
-        try {
-            Message message=new Message();
-            message.setContent("连接成功");
-            message.setFrom(RoleEnum.SERVER.getCode());
-            message.setSendTime(now);
-            message.setTo(RoleEnum.CLIENT.getCode());
-            this.sendMessage(JSON.toJSONString(message));
-        } catch (IOException var4) {
-            log.error("设备{}连接失败!!!!!!",ip);
-        }
-
     }
 
     /**
@@ -101,7 +99,7 @@ public class WebSocketConfig {
      */
     @OnMessage
     public void onMessage(String message, Session session) {
-        refreshHeart(LocalDateTime.now());
+        refreshHeart(LocalDateTime.now(),message);
         log.info("设备{}发来消息,报文内容:{}",socketConfigMap.get(session.getId()).getDeviceIp(),message);
     }
 
@@ -172,7 +170,10 @@ public class WebSocketConfig {
      * @author xiejiarong
      * @date 2020年06月23日 14:14
      */
-    public  void refreshHeart(LocalDateTime refreshTime){
-        socketConfigMap.get(this.session.getId()).setLastRefreshTime(refreshTime);
+    public  void refreshHeart(LocalDateTime refreshTime,String message){
+        String time=DATE_TIME_FORMATTER.format(refreshTime);
+        socketConfigMap.get(this.session.getId()).setLastRefreshTime(refreshTime).setClose(false).getHistory().put(time,
+                new Message().setSendTime(time).setTo(RoleEnum.SERVER.getCode())
+        .setContent(message).setFrom(RoleEnum.CLIENT.getCode()));
     }
 }

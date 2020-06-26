@@ -3,6 +3,7 @@ package com.xiejr.actuator.controller;
 import com.xiejr.actuator.entity.DeviceVo;
 import com.xiejr.actuator.entity.constant.ConstantConfig;
 import com.xiejr.actuator.exceptioin.SocketActuatorException;
+import com.xiejr.actuator.model.Message;
 import com.xiejr.actuator.model.ResultVO;
 import com.xiejr.actuator.service.IpadActuatorService;
 import org.springframework.context.annotation.Lazy;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: socket-actuator-spring-boot-starter
@@ -39,5 +41,10 @@ public class IpadActuatorController {
     public ResultVO disconnect(@PathVariable("sessionId") String sessionId)throws SocketActuatorException {
         ipadActuatorService.disconnect(sessionId);
         return ResultVO.success("断开成功");
+    }
+
+    @GetMapping("/hearts/{sessionId}")
+    public ResultVO hearts(@PathVariable("sessionId") String sessionId) throws SocketActuatorException{
+        return ResultVO.<Map<String, Message>>data(ipadActuatorService.hearts(sessionId));
     }
 }

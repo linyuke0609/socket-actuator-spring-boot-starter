@@ -21,7 +21,7 @@ public class Message extends BaseEntity {
 
     private String to;
 
-    private LocalDateTime sendTime;
+    private String sendTime;
 
     private String content;
 

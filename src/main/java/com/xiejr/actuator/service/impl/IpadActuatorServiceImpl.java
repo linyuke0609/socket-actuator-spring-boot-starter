@@ -2,9 +2,11 @@ package com.xiejr.actuator.service.impl;
 
 import com.xiejr.actuator.entity.DeviceVo;
 import com.xiejr.actuator.exceptioin.SocketActuatorException;
+import com.xiejr.actuator.model.Message;
 import com.xiejr.actuator.service.IpadActuatorService;
 import com.xiejr.actuator.socket.SocketClient;
 import com.xiejr.actuator.socket.WebSocketConfig;
+import com.xiejr.actuator.util.WebsocketUtils;
 import org.springframework.stereotype.Service;
 
 import javax.websocket.Session;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -52,5 +55,10 @@ public class IpadActuatorServiceImpl implements IpadActuatorService {
         }
 
         ;
+    }
+
+    @Override
+    public Map<String, Message> hearts(String sessionId) throws SocketActuatorException {
+        return WebSocketConfig.socketConfigMap.get(sessionId).getHistory();
     }
 }

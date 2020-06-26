@@ -1,0 +1,16 @@
+server:
+  port: 8081
+socket:
+  actuator:
+    author: xiejiarong
+    ip-address: 127.0.0.1
+    active: true
+    version: 1.0
+    system-name: springboot监控系统
+    server:
+      eviction-interval-timer-in-ms: 10
+      lease-renewal-interval-in-seconds: 3
+      evit-when-time-out: false
+      lease-expiration-duration-in-seconds: 9
+    simple-page-application: true
+
