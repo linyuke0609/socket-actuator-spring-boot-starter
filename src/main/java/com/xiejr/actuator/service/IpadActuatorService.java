@@ -19,5 +19,5 @@ public interface IpadActuatorService {
 
     void disconnect(String sessionId) throws SocketActuatorException;
 
-    Map<String, Message> hearts(String sessionId) throws SocketActuatorException;
+    List<Message> hearts(String sessionId) throws SocketActuatorException;
 }

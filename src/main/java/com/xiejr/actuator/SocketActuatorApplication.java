@@ -1,5 +1,6 @@
 package com.xiejr.actuator;
 
+import com.gitee.sophis.annotations.EnableApiDocument;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @create: 2020-06-26 16:08
  **/
 @SpringBootApplication
+@EnableApiDocument(basePackages = "com.xiejr",groupName = "test",version = "1.0")
 public class SocketActuatorApplication {
     public static void main(String[] args) {
         SpringApplication.run(SocketActuatorApplication.class, args);

@@ -45,6 +45,8 @@ public class IpadActuatorController {
 
     @GetMapping("/hearts/{sessionId}")
     public ResultVO hearts(@PathVariable("sessionId") String sessionId) throws SocketActuatorException{
-        return ResultVO.<Map<String, Message>>data(ipadActuatorService.hearts(sessionId));
+        return ResultVO.<List<Message>>data(ipadActuatorService.hearts(sessionId));
     }
+
+
 }

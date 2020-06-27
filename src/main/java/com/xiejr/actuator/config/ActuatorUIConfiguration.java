@@ -14,6 +14,6 @@ public class ActuatorUIConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("monitor.html").addResourceLocations("classpath:/META-INF/actuator-ui/");
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/actuator-ui/");
+        registry.addResourceHandler("/monitor/**").addResourceLocations("classpath:/META-INF/actuator-ui/monitor/");
     }
 }

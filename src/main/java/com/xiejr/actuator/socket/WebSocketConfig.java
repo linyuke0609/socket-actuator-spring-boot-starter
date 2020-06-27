@@ -36,7 +36,7 @@ public class WebSocketConfig {
 
     private Session session;
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER=DateTimeFormatter.ofPattern("dd日 hh时:mm分:ss秒");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
 

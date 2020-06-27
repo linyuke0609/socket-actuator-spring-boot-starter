@@ -58,7 +58,12 @@ public class IpadActuatorServiceImpl implements IpadActuatorService {
     }
 
     @Override
-    public Map<String, Message> hearts(String sessionId) throws SocketActuatorException {
-        return WebSocketConfig.socketConfigMap.get(sessionId).getHistory();
+    public List<Message> hearts(String sessionId) throws SocketActuatorException {
+        Map<String,Message> maps=WebSocketConfig.socketConfigMap.get(sessionId).getHistory();
+        List<Message> res=new ArrayList<>(maps.size());
+        maps.forEach((key,value)->{
+            res.add(value);
+        });
+        return res;
     }
 }

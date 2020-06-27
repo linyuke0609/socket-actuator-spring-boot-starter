@@ -1,7 +1,9 @@
 package com.xiejr.actuator.controller;
 
 import com.xiejr.actuator.entity.constant.ConstantConfig;
+import com.xiejr.actuator.exceptioin.SocketActuatorException;
 import com.xiejr.actuator.model.ActuatorBaseInfo;
+import com.xiejr.actuator.model.HeartCheck;
 import com.xiejr.actuator.model.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -26,9 +28,18 @@ public class BaseInfoController {
     @Lazy
     ActuatorBaseInfo actuatorBaseInfo;
 
+    @Autowired
+    @Lazy
+    HeartCheck heartCheck;
+
     @GetMapping("/getSysInfo")
     public ResultVO getSysInfo(){
         return ResultVO.<ActuatorBaseInfo>data(actuatorBaseInfo);
+    }
+
+    @GetMapping("/rules")
+    public ResultVO rules() throws SocketActuatorException {
+        return ResultVO.<HeartCheck>data(heartCheck);
     }
 
 
