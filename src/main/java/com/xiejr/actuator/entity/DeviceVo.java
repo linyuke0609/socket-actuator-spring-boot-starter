@@ -23,7 +23,7 @@ public class DeviceVo extends BaseEntity {
 
     private String conectTime;
 
-    private String lastModiftTime;
+    private String lastModifyTime;
 
     private String close;
 }

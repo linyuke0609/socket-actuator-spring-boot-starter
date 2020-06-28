@@ -37,7 +37,7 @@ public class IpadActuatorServiceImpl implements IpadActuatorService {
                    .close(value.getClose()?"断线":"正常")
                    .conectTime(dateTimeFormatter.format(value.getConectTime()))
                    .deviceIp(value.getDeviceIp())
-                   .lastModiftTime(dateTimeFormatter.format(value.getLastRefreshTime()))
+                   .lastModifyTime(dateTimeFormatter.format(value.getLastRefreshTime()))
                    .build();
            res.add(device);
         });

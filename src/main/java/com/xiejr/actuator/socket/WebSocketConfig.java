@@ -38,6 +38,8 @@ public class WebSocketConfig {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    private static final DateTimeFormatter SECONDS_FORMATTER=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
 
 
@@ -53,11 +55,11 @@ public class WebSocketConfig {
         this.session=session;
         InetSocketAddress ipAddress= WebsocketUtils.getRemoteAddress(session);
         LocalDateTime now=LocalDateTime.now();
-        String time=DATE_TIME_FORMATTER.format(now);
+        String time=SECONDS_FORMATTER.format(now);
         String sessionId=session.getId();
         LinkedHashMap<String,Message> history=new LinkedHashMap<>(50);
         history.put(time,new Message().setFrom(RoleEnum.CLIENT.getCode()).setContent("客户端首次连接").setTo(RoleEnum.SERVER.getCode())
-        .setSendTime(time));
+        .setSendTime(DATE_TIME_FORMATTER.format(now)));
         SocketClient socketClient=SocketClient.builder()
                 .close(false)
                 .conectTime(now)
@@ -172,7 +174,7 @@ public class WebSocketConfig {
      */
     public  void refreshHeart(LocalDateTime refreshTime,String message){
         String time=DATE_TIME_FORMATTER.format(refreshTime);
-        socketConfigMap.get(this.session.getId()).setLastRefreshTime(refreshTime).setClose(false).getHistory().put(time,
+        socketConfigMap.get(this.session.getId()).setLastRefreshTime(refreshTime).setClose(false).getHistory().put(SECONDS_FORMATTER.format(refreshTime),
                 new Message().setSendTime(time).setTo(RoleEnum.SERVER.getCode())
         .setContent(message).setFrom(RoleEnum.CLIENT.getCode()));
     }
