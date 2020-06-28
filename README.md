@@ -20,7 +20,7 @@
 <dependency>
   <groupId>com.xiejr.actuator</groupId>
   <artifactId>socket-actuator-spring-boot-starter</artifactId>
-  <version>1.0.3.RELEASE</version>
+  <version>1.0.4.RELEASE</version>
 </dependency>
 ```
 
