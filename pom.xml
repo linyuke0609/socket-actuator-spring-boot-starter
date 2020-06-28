@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.xiejr.actuator</groupId>
     <artifactId>socket-actuator-spring-boot-starter</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.4.RELEASE</version>
     <name>socket-actuator-spring-boot-starter</name>
     <description>springboot应用的系统监控插件</description>
 
@@ -46,9 +46,10 @@
     </developers>
 
     <dependencies>
+        <!--人脸识别组件-->
         <dependency>
-            <groupId>com.gitee.sophis</groupId>
-            <artifactId>spring-boot-knif4j-starter</artifactId>
+            <groupId>store.sophi.xjr</groupId>
+            <artifactId>spring-boot-ai-face-starter</artifactId>
             <version>1.0.4.RELEASE</version>
         </dependency>
         <dependency>

@@ -16,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+import store.sophi.xjr.annotations.EnableAiFace;
 
 
 /**
@@ -33,6 +34,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 @Import(ActuatorUIConfiguration.class)
 @ComponentScan("com.xiejr.actuator")
 @ServletComponentScan
+@EnableAiFace(appId = "19500780",apiKey = "PNPvm88OxksbNN53WBuF7Khv",secretKey = "GDIhOqqtoplhP8Y6kjaNWHCvyMuUnjYF")
 public class ActuatorAutoConfiguration  implements InitializingBean {
 
     @Autowired
